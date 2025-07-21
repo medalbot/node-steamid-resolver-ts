@@ -21,8 +21,8 @@ npm install node-steamid-resolver-ts
 
 ```typescript
 import {
-  steamID64ToCustomUrl,
   customUrlToSteamID64,
+  steamID64ToCustomUrl,
   steamID64ToFullInfo,
   SteamProfileNotFoundError,
 } from "node-steamid-resolver-ts";
@@ -31,22 +31,25 @@ import {
 const customUrl = await steamID64ToCustomUrl("76561198260031749"); // "3urobeat"
 const steamId = await customUrlToSteamID64("3urobeat"); // "76561198260031749"
 
+console.log("Custom URL:", customUrl);
+console.log("Steam ID:", steamId);
+
 // Full profile data
 const profile = await steamID64ToFullInfo("76561198260031749");
-console.log(profile.steamID[0], profile.memberSince?.[0]);
+console.log("Profile data:", profile.steamID[0], profile.memberSince?.[0]);
 
 // Error handling
 try {
-  await steamID64ToCustomUrl("invalid-id");
+  await steamID64ToCustomUrl("86561198260031749");
 } catch (error) {
   if (error instanceof SteamProfileNotFoundError) {
-    console.log("Profile not found");
+    console.log("(Error) Profile not found");
   }
 }
 
 // Callback support
 steamID64ToCustomUrl("76561198260031749", (err, result) => {
-  if (!err) console.log("Custom URL:", result);
+  if (!err) console.log("(Callback) Custom URL:", result);
 });
 ```
 
