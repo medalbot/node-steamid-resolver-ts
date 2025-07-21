@@ -17,7 +17,7 @@ import {
   steamID64ToFullInfo,
   steamID64ToProfileName,
   SteamProfileNotFoundError,
-} from './index.js';
+} from '../index.js';
 
 // Test data based on real Steam profiles
 const TEST_DATA = {
