@@ -163,7 +163,11 @@ export async function parseSteamXML(url: string): Promise<SteamXMLResponse> {
       const errorMessage =
         extractString(parsed.response.error) || 'Unknown error';
 
-      if (errorMessage.includes('profile could not be found')) {
+      if (
+        errorMessage.includes('profile could not be found') ||
+        errorMessage.includes('The specified profile could not be found') ||
+        errorMessage.includes('Failed loading profile data')
+      ) {
         throw new SteamProfileNotFoundError('profile');
       }
       if (errorMessage.includes('group could not be found')) {

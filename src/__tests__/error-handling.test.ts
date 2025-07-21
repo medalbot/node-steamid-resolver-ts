@@ -12,13 +12,6 @@ import {
 import { TEST_DATA } from './test-data.js';
 
 describe('Error handling', () => {
-  test('should handle network errors gracefully', async () => {
-    // This test might be flaky depending on network conditions
-    // Consider mocking HTTP requests for more reliable testing
-    // For now, this is a placeholder test
-    expect(true).toBe(true);
-  });
-
   test('should preserve error types', async () => {
     try {
       await steamID64ToCustomUrl(TEST_DATA.invalidSteamID64);
