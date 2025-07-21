@@ -127,12 +127,21 @@ export async function parseSteamXML(url: string): Promise<SteamXMLResponse> {
       !xmlText.includes('<profile') &&
       !xmlText.includes('<memberList')
     ) {
+      // Detect group-specific errors based on URL context
+      if (url.includes('/groups/') || url.includes('memberslistxml')) {
+        throw new SteamGroupNotFoundError('group');
+      }
+
+      // Check for common group error messages in HTML response
       if (
         xmlText.includes('group could not be found') ||
-        xmlText.includes('group does not exist')
+        xmlText.includes('group does not exist') ||
+        xmlText.includes('Group') ||
+        (xmlText.includes('<html') && xmlText.includes('error'))
       ) {
         throw new SteamGroupNotFoundError('group');
       }
+
       throw new SteamAPIError('Invalid XML response from Steam', 'PARSE_ERROR');
     }
 

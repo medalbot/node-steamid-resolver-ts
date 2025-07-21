@@ -58,13 +58,17 @@ export function buildGroupURL(groupIdentifier: string): string {
 
 /** Build sharedfile URL */
 export function buildSharedfileURL(sharedfileId: string): string {
-  const cleanId = parseParam(sharedfileId);
-
-  // If already a full URL, return as-is
-  if (cleanId.includes('steamcommunity.com/sharedfiles/')) {
-    return cleanId;
+  // If it's a full sharedfile URL, extract the ID from query parameter
+  if (sharedfileId.includes('steamcommunity.com/sharedfiles/')) {
+    const url = new URL(sharedfileId);
+    const id = url.searchParams.get('id');
+    if (id) {
+      return `https://steamcommunity.com/sharedfiles/filedetails/?id=${id}`;
+    }
+    return sharedfileId; // Return as-is if no ID found
   }
 
+  const cleanId = parseParam(sharedfileId);
   return `https://steamcommunity.com/sharedfiles/filedetails/?id=${cleanId}`;
 }
 
