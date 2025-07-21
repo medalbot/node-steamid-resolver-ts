@@ -1,7 +1,7 @@
 {
-  "name": "steamid-resolver-ts",
+  "name": "node-steamid-resolver-ts",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Professional TypeScript library for Steam ID resolution with comprehensive error handling",
   "author": "Your Name",
   "license": "MIT",
@@ -65,6 +65,7 @@
     "@biomejs/biome": "2.1.2",
     "@types/bun": "latest",
     "@types/xml2js": "^0.4.14",
+    "bumpp": "^10.2.0",
     "tsup": "^8.0.0"
   }
 }
